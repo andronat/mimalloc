@@ -239,6 +239,9 @@ endif()
 
 # single object file for more predictable static overriding
 add_library(mimalloc-obj OBJECT src/static.c)
+if(MI_STATIC_PIC)
+  set_property(TARGET mimalloc-obj PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
 target_compile_definitions(mimalloc-obj PRIVATE ${mi_defines})
 target_compile_options(mimalloc-obj PRIVATE ${mi_cflags})
 target_include_directories(mimalloc-obj PUBLIC
